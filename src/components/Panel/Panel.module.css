@@ -1,0 +1,80 @@
+.Panel {
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .Panel {
+    width: 60%;
+  }
+}
+
+.Active {
+  background-color: #f7f7f7;
+}
+.Active .PlayerName {
+  font-weight: 300;
+}
+
+.Active .PlayerName::after {
+  content: "\2022";
+  font-size: 47px;
+  color: #eb4d4d;
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+
+.PlayerName {
+  font-size: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+
+.PlayerScore {
+  font-size: 80px;
+  font-weight: 100;
+  color: #eb4d4d;
+  margin-top: -20px;
+  margin-bottom: 130px;
+}
+
+.CurrentRollBox {
+  text-align: center;
+  background-color: #eb4d4d;
+  color: #fff;
+  width: 30%;
+  padding: 12px;
+}
+
+.CurrentRollLabel {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #222;
+}
+
+.CurrentRollTotal {
+  font-size: 30px;
+}
+
+@media (max-width: 500px) {
+  .PlayerName {
+    font-size: 30px;
+  }
+  .Active .PlayerName::after {
+    font-size: 40px;
+  }
+
+  .PlayerScore {
+    font-size: 70px;
+    margin: -30px 0 50px 0;
+  }
+}
