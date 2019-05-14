@@ -13,10 +13,10 @@ const panel = props => {
   return (
     <div className={panelClasses.join(" ")}>
       <div className={classes.PlayerName}>Player {props.number}</div>
-      <div className={classes.PlayerScore}>0</div>
+      <div className={classes.PlayerScore}>{props.total}</div>
       <div className={classes.CurrentRollBox}>
         <div className={classes.CurrentRollLabel}>Current</div>
-        <div className={classes.CurrentRollTotal}>0</div>
+        <div className={classes.CurrentRollTotal}>{props.current}</div>
       </div>
     </div>
   );

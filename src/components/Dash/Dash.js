@@ -10,8 +10,12 @@ const dash = props => {
       <Dice value={props.dice1} />
       <Dice value={props.dice2} />
 
-      <ControlButton icon="ion-ios-loop" text="Roll Dice" />
-      <ControlButton icon="ion-ios-download-outline" text="Hold" />
+      <ControlButton icon="ion-ios-loop" text="Roll Dice" click={props.roll} />
+      <ControlButton
+        icon="ion-ios-download-outline"
+        text="Hold"
+        click={props.hold}
+      />
       <input
         type="number"
         placeholder="Final score"
