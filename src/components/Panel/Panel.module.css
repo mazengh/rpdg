@@ -2,7 +2,6 @@
   width: 50%;
   height: 100%;
   box-sizing: border-box;
-  border: 1px solid blue;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -20,6 +19,14 @@
 }
 .Active .PlayerName {
   font-weight: 300;
+}
+
+.Winner {
+  background-color: #f7f7f7;
+}
+.Winner .PlayerName {
+  font-weight: 300;
+  color: #eb4d4d;
 }
 
 .Active .PlayerName::after {

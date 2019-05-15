@@ -6,20 +6,29 @@ import Panel from "./components/Panel/Panel";
 import classes from "./App.module.css";
 
 class App extends Component {
-  state = {
-    activePlayer: 1,
-    dice: [0, 0],
-    players: {
-      1: {
-        current: 0,
-        total: 0
-      },
-      2: {
-        current: 0,
-        total: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      gameActive: true,
+      activePlayer: 1,
+      scoreToWin: 100,
+      dice: [0, 0],
+      players: {
+        1: {
+          current: 0,
+          total: 0,
+          winner: false
+        },
+        2: {
+          current: 0,
+          total: 0,
+          winner: false
+        }
       }
-    }
-  };
+    };
+
+    this.scoreToWinInputHandler = this.scoreToWinInputHandler.bind(this);
+  }
 
   clonePlayer = state => {
     return {
@@ -27,6 +36,10 @@ class App extends Component {
       2: { ...state.players[2] }
     };
   };
+
+  scoreToWinInputHandler(event) {
+    this.setState({ scoreToWin: event.target.value });
+  }
 
   nextPlayer = () => {
     this.setState(prevState => {
@@ -40,13 +53,38 @@ class App extends Component {
     });
   };
 
+  newGameHandler = () => {
+    // reset state
+    this.setState({
+      gameActive: true,
+      activePlayer: 1,
+      dice: [0, 0],
+      players: {
+        1: {
+          current: 0,
+          total: 0,
+          winner: false
+        },
+        2: {
+          current: 0,
+          total: 0,
+          winner: false
+        }
+      }
+    });
+  };
+
   rollHandler = () => {
+    // no action is performed if game is not active
+    if (!this.state.gameActive) return;
+
     const dice1Value = Math.floor(Math.random() * 6) + 1;
     const dice2Value = Math.floor(Math.random() * 6) + 1;
 
     if (dice1Value === 1 || dice2Value === 1) {
       // next player's turn
-      this.nextPlayer();
+      //this.nextPlayer();
+      this.setState({ dice: [dice1Value, dice2Value] });
     } else {
       //update the current score
       this.setState(prevState => {
@@ -64,6 +102,9 @@ class App extends Component {
   };
 
   holdHandler = () => {
+    // no action is performed if game is not active
+    if (!this.state.gameActive) return;
+
     // Add CURRENT score to the TOTAL score
     this.setState(prevState => {
       const prevTotal = prevState.players[prevState.activePlayer].total;
@@ -82,17 +123,26 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.dice.find(dice => dice === 1)) {
+      //Next player
+      this.nextPlayer();
+    }
+
     if (
       // if the total changed and the active player is the previous player
       this.state.activePlayer === prevState.activePlayer &&
       this.state.players[this.state.activePlayer].total !==
-        prevState.players[prevState.activePlayer].total
+        prevState.players[prevState.activePlayer].total &&
+      prevState.gameActive
     ) {
       const currentPlayerTotal = this.state.players[this.state.activePlayer]
         .total;
+
       // Check if current player won the game
-      if (currentPlayerTotal >= 100) {
-        alert(`Player ${this.state.activePlayer} Won the Game`);
+      if (currentPlayerTotal >= this.state.scoreToWin) {
+        const players = this.clonePlayer(this.state);
+        players[prevState.activePlayer].winner = true;
+        this.setState({ gameActive: false, players });
       } else {
         //Next player
         this.nextPlayer();
@@ -108,18 +158,23 @@ class App extends Component {
           activePlayer={this.state.activePlayer}
           current={this.state.players[1].current}
           total={this.state.players[1].total}
+          isWinner={this.state.players[1].winner}
         />
         <Panel
           number={2}
           activePlayer={this.state.activePlayer}
           current={this.state.players[2].current}
           total={this.state.players[2].total}
+          isWinner={this.state.players[2].winner}
         />
         <Dash
           dice1={this.state.dice[0]}
           dice2={this.state.dice[1]}
           roll={this.rollHandler}
           hold={this.holdHandler}
+          new={this.newGameHandler}
+          scoreToWin={this.state.scoreToWin}
+          handleChange={this.scoreToWinInputHandler}
         />
       </div>
     );

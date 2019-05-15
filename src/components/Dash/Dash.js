@@ -6,7 +6,11 @@ import Dice from "../Dice/Dice";
 const dash = props => {
   return (
     <div className={classes.Dash}>
-      <ControlButton icon="ion-ios-plus-outline" text="New Game" />
+      <ControlButton
+        icon="ion-ios-plus-outline"
+        text="New Game"
+        click={props.new}
+      />
       <Dice value={props.dice1} />
       <Dice value={props.dice2} />
 
@@ -16,13 +20,20 @@ const dash = props => {
         text="Hold"
         click={props.hold}
       />
-      <input
-        type="number"
-        placeholder="Final score"
-        className={classes.FinalScore}
-      />
+      <div className={classes.ScoreToWin}>
+        <label className={classes.ScoreToWinLabel} htmlFor="scoreToWin">
+          Score to win!
+        </label>
+        <input
+          id="scoreToWin"
+          type="number"
+          value={props.scoreToWin}
+          className={classes.ScoreToWin}
+          onChange={props.handleChange}
+        />
+      </div>
     </div>
   );
 };
 
-export default dash;
+export default React.memo(dash);

@@ -8,4 +8,4 @@ const controlButton = props => (
   </button>
 );
 
-export default controlButton;
+export default React.memo(controlButton);

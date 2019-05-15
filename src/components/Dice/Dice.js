@@ -23,4 +23,4 @@ const dice = props => {
   );
 };
 
-export default dice;
+export default React.memo(dice);
