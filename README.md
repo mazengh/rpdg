@@ -7,7 +7,6 @@ Sample running demo at https://rpdg.herokuapp.com/
 ### About
 
 React Pig Dice Game is a simple dice game with the below rules.
-This component offers the below features
 
 - A new game can be created at any time when pressing the New Game button
 - Players roll the dice to accumulate points
