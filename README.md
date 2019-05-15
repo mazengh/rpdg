@@ -2,6 +2,8 @@
 
 > React Pig Dice Game
 
+Sample running demo at https://rpdg.herokuapp.com/
+
 ### About
 
 React Pig Dice Game is a simple dice game with the below rules.
