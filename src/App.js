@@ -82,8 +82,8 @@ class App extends Component {
     const dice2Value = Math.floor(Math.random() * 6) + 1;
 
     if (dice1Value === 1 || dice2Value === 1) {
-      // next player's turn
-      //this.nextPlayer();
+      // next player's turn, componentDidUpdate will check dice value
+      // and call nextPlayer
       this.setState({ dice: [dice1Value, dice2Value] });
     } else {
       //update the current score
@@ -151,22 +151,22 @@ class App extends Component {
   }
 
   render() {
+    const panels = Object.keys(this.state.players).map(playerKey => {
+      return (
+        <Panel
+          key={`panel_${playerKey}`}
+          number={playerKey}
+          activePlayer={this.state.activePlayer}
+          current={this.state.players[playerKey].current}
+          total={this.state.players[playerKey].total}
+          isWinner={this.state.players[playerKey].winner}
+        />
+      );
+    });
+
     return (
       <div className={classes.App}>
-        <Panel
-          number={1}
-          activePlayer={this.state.activePlayer}
-          current={this.state.players[1].current}
-          total={this.state.players[1].total}
-          isWinner={this.state.players[1].winner}
-        />
-        <Panel
-          number={2}
-          activePlayer={this.state.activePlayer}
-          current={this.state.players[2].current}
-          total={this.state.players[2].total}
-          isWinner={this.state.players[2].winner}
-        />
+        {panels}
         <Dash
           dice1={this.state.dice[0]}
           dice2={this.state.dice[1]}

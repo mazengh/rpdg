@@ -1,6 +1,18 @@
 # rpdg
 
-React Pig Dice Game
+> React Pig Dice Game
+
+### About
+
+React Pig Dice Game is a simple dice game with the below rules.
+This component offers the below features
+
+- A new game can be created at any time when pressing the New Game button
+- Players roll the dice to accumulate points
+- If any of the dice is 1, player loses accumlated points
+- If player presses Hold button, accumlated dice will add up to total
+- The player that reaches the score to win first, wins the game
+- Score to win can be set to desired number value
 
 ## Available Scripts
 
