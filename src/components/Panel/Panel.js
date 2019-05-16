@@ -11,6 +11,7 @@ const panel = props => {
   // if panel number is equal to current active player
   // number, set it to active
   else if (props.activePlayer === props.number) {
+    console.log("yes");
     panelClasses.push(classes.Active);
   }
 
