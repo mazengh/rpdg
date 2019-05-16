@@ -155,7 +155,7 @@ class App extends Component {
       return (
         <Panel
           key={`panel_${playerKey}`}
-          number={parseInt(playerKey, 2)}
+          number={parseInt(playerKey)}
           activePlayer={this.state.activePlayer}
           current={this.state.players[playerKey].current}
           total={this.state.players[playerKey].total}
